@@ -31,7 +31,7 @@ function getImportStrings(slide: string): string {
 export function mdxToPresentation() {
 	createSlidesFolder();
 
-	mdxToSlides().forEach((slide, index) => {
+	for (const [index, slide] of mdxToSlides().entries()) {
 		const file_path = path.resolve(`src/pages/slides/${index}.astro`);
 
 		const content = getImportStrings(slide) + "\n\n" + slide;
@@ -39,7 +39,7 @@ export function mdxToPresentation() {
 		fs.writeFileSync(file_path, content, {
 			flag: "w+",
 		});
-	});
+	}
 
 	console.log("Done!");
 }

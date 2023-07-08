@@ -1,7 +1,5 @@
-import React from "react"
+import React from "react";
 
 export const Notes = () => {
-    return (
-        <p>todo implement</p>
-    )
-}
+	return <p>todo implement</p>;
+};

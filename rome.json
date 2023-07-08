@@ -3,6 +3,9 @@
 	"organizeImports": {
 		"enabled": false
 	},
+	"files": {
+		"ignore": [".vscode/"]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {

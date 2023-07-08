@@ -8,7 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deck": "tsx src/scripts/mdx-to-presentation.ts"
+    "deck": "tsx src/scripts/mdx-to-presentation.ts",
+    "prepare": "husky install",
+    "format": "rome format .",
+    "format:write": "rome format --write ."
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
@@ -20,6 +23,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "husky": "8.0.3",
     "rome": "12.1.3",
     "tsx": "3.12.7"
   }

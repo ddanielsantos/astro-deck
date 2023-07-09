@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deck": "tsx src/scripts/mdx-to-presentation.ts",
+    "deck": "tsx src/lib/mdx-to-presentation.ts",
     "prepare": "husky install",
     "ci": "rome ci .",
     "format:write": "rome format --write ."

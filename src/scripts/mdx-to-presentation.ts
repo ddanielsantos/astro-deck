@@ -25,14 +25,14 @@ function getImportStrings(slide: string): string {
 		return `import { ${component} } from '../../components/${component}'`;
 	});
 
-	return "---\n" + imports.join("\n") + "\n---";
+	return imports.join("\n");
 }
 
 export function mdxToPresentation() {
 	createSlidesFolder();
 
 	for (const [index, slide] of mdxToSlides().entries()) {
-		const file_path = path.resolve(`src/pages/slides/${index}.astro`);
+		const file_path = path.resolve(`src/pages/slides/${index}.mdx`);
 
 		const content = getImportStrings(slide) + "\n\n" + slide;
 

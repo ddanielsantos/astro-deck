@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`split slides from content 1`] = `
+[
+  "
+        <Head>
+        <title>Astro Deck</title>
+        </Head>
+
+        <Notes>
+        Hope you enjoy the show!
+        </Notes>
+
+        ",
+  "
+
+        # Hello
+
+        <Notes>
+        This is a note
+        </Notes>
+
+        ",
+  "
+
+        # Bye
+
+        <Notes>
+        This is another note
+        </Notes>
+    ",
+]
+`;

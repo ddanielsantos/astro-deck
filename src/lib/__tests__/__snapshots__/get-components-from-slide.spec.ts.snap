@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should handle duplicated components 1`] = `
+[
+  "Head",
+  "Title",
+  "Header",
+]
+`;

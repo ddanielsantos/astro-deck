@@ -1,5 +1,9 @@
 import React from "react";
 
-export const Header = () => {
-	return <p>todo implement</p>;
+type Props = React.JSX.IntrinsicAttributes
+    & React.ClassAttributes<HTMLElement>
+    & React.HTMLAttributes<HTMLElement>
+
+export const Header = (props: Props) => {
+	return <header {...props}/>;
 };

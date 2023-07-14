@@ -1,0 +1,26 @@
+---
+function getCurrentSlide(): number {
+    return Number(Astro.url.pathname.split("/").at(-1));
+}
+
+async function getNumberOfSlides(): Promise<number> {
+    return (await Astro.glob("../pages/slides/*.mdx")).length;
+}
+
+const currentSlide = getCurrentSlide();
+const numberOfSlides = await getNumberOfSlides();
+const hasNext = currentSlide !== numberOfSlides;
+const hasPrev = currentSlide !== 1;
+const nextSlideUrl = `/slides/${currentSlide + 1}`;
+const prevSlideUrl = `/slides/${currentSlide - 1}`;
+---
+
+<div>
+    hello from layout!!
+    <p>
+        slide {currentSlide} of {numberOfSlides}
+    </p>
+    <slot />
+    {hasPrev && <a href={prevSlideUrl}>prev</a>}
+    {hasNext && <a href={nextSlideUrl}>next</a>}
+</div>

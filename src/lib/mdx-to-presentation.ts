@@ -6,15 +6,22 @@ import { getSlidesFromContent } from "./get-slides-from-content";
 import { getComponentsFromSlide } from "./get-components-from-slide";
 import { getImportStringsFromComponents } from "./get-import-strings-from-slide";
 
+const layout_import = `---
+layout: ../../layouts/slide-wrapper.astro
+---
+
+`;
+
 export function mdxToPresentation(mdx: string) {
 	createSlidesFolder();
 
 	for (const [index, slide] of getSlidesFromContent(mdx).entries()) {
-		const file_path = path.resolve(`src/pages/slides/${index}.mdx`);
+		const file_path = path.resolve(`src/pages/slides/${index + 1}.mdx`);
 
 		const slide_components = getComponentsFromSlide(slide);
 
 		const content =
+			layout_import +
 			getImportStringsFromComponents(slide_components).join("\n") +
 			"\n\n" +
 			slide;
@@ -26,8 +33,3 @@ export function mdxToPresentation(mdx: string) {
 
 	console.log("Done!");
 }
-
-const p = path.resolve("deck.mdx");
-const content = fs.readFileSync(p, "utf-8");
-
-mdxToPresentation(content);

@@ -1,12 +1,11 @@
 export function getComponentsFromSlide(slide: string): string[] {
-	const components = slide.match(/<([A-Z][a-z]+)/g);
+	const JSX_COMPONENT_MATCHER = /(?<=<)([A-Z][A-z]*)(?=[^/]*\/?>)/g;
+
+	const components = slide.match(JSX_COMPONENT_MATCHER);
+
 	if (!components) {
 		return [];
 	}
 
-	const component_names = components.map((component) => {
-		return component.replace("<", "").replace(" ", "");
-	});
-
-	return [...new Set(component_names)];
+	return [...new Set(components)];
 }

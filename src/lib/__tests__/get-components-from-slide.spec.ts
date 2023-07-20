@@ -23,11 +23,20 @@ it("should handle duplicated components", () => {
         header 2
 
         </Header>
+
+        <StepList >
+
+            Uppercase text
+            steplist    
+
+        </StepList>
+
+        <StepList/>
   `;
 
 	const components = getComponentsFromSlide(slide);
 
 	expect(components).toMatchSnapshot();
-	expect(components.length).toBe(3);
-	expect(components).toStrictEqual(["Head", "Title", "Header"]);
+	expect(components.length).toBe(4);
+	expect(components).toStrictEqual(["Head", "Title", "Header", "StepList"]);
 });

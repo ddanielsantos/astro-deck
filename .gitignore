@@ -26,3 +26,4 @@ pnpm-debug.log*
 
 # proto-deck generated files
 src/pages/slides
+src/lib/stats.json

@@ -1,4 +1,7 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+import { SlideControls } from '../components/SlideControls'
+
 function getSlideFromPathname(
     pathname: string | undefined
 ): string | undefined {
@@ -22,14 +25,19 @@ const nextSlideUrl = `/slides/${currentSlide + 1}`;
 const prevSlideUrl = `/slides/${currentSlide - 1}`;
 ---
 
+<head>
+    <ViewTransitions />
+</head>
+
 <div>
-    hello from layout!!
     <p>
         slide {currentSlide} of {numberOfSlides}
     </p>
-    <slot />
-    {hasPrev && <a href={prevSlideUrl}>prev</a>}
-    {hasNext && <a href={nextSlideUrl}>next</a>}
+    <!-- TODO: custom transitions -->
+    <div transition:animate="slide">
+        <slot/>
+    </div>
+    <SlideControls hasNext={hasNext} hasPrev={hasPrev} prevSlideUrl={prevSlideUrl} nextSlideUrl={nextSlideUrl}/>
     {
         slides.map((slide, index) => (
             <a href={`/slides/${index + 1}`}>

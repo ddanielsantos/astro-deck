@@ -4,6 +4,7 @@ interface ButtonProps {
     direction: 'next' | 'prev'
     shouldShow: boolean
     href: string
+    id?: string
     children?: React.ReactNode
     debug?: boolean
 }
@@ -17,7 +18,7 @@ const Button = (props: ButtonProps) => {
     const debugProps = props.debug ? {outline: "1px solid red"} : {}
 
     return (
-        <a href={props.href} style={{
+        <a id={props.id} href={props.href} style={{
             position: 'absolute',
             top: '0',
             width: '200px',
@@ -41,8 +42,8 @@ export const SlideControls = ({hasNext, hasPrev, nextSlideUrl, prevSlideUrl}: Pr
     return (
         <>
             {/* {hasPrev && <a href={prevSlideUrl}>prev</a>} */}
-            <Button direction="prev" href={prevSlideUrl} shouldShow={hasPrev}/>
-            <Button direction="next" href={nextSlideUrl} shouldShow={hasNext}/>
+            <Button direction="prev" href={prevSlideUrl} shouldShow={hasPrev} id="prev"/>
+            <Button direction="next" href={nextSlideUrl} shouldShow={hasNext} id="next"/>
         </>
     )
 }

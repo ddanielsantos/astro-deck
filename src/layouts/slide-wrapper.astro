@@ -46,3 +46,15 @@ const prevSlideUrl = `/slides/${currentSlide - 1}`;
         ))
     }
 </div>
+
+<script define:vars={{ hasNext, hasPrev, nextSlideUrl, prevSlideUrl }}>
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight' && hasNext) {
+            document.querySelector('#next')?.click();
+        }
+
+        if (event.key === 'ArrowLeft' && hasPrev) {
+            document.querySelector('#prev')?.click();
+        }
+    })
+</script>

@@ -1,0 +1,18 @@
+{
+	"name": "@astro-deck/cli",
+	"version": "0.4.0",
+	"description": "The CLI for astro-deck",
+	"bin": {
+		"astro-deck": "./src/index.mjs"
+	},
+	"scripts": {
+		"test": "vitest"
+	},
+	"dependencies": {
+		"yargs": "^17.7.2",
+		"execa": "^7.1.1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

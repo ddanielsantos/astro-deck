@@ -4,48 +4,69 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@astrojs/mdx':
-    specifier: ^0.19.7
-    version: 0.19.7(astro@2.9.0)
-  '@astrojs/react':
-    specifier: ^2.2.1
-    version: 2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
-  '@types/react':
-    specifier: ^18.0.21
-    version: 18.2.14
-  '@types/react-dom':
-    specifier: ^18.0.6
-    version: 18.2.6
-  astro:
-    specifier: ^2.9.0
-    version: 2.9.0
-  react:
-    specifier: ^18.0.0
-    version: 18.2.0
-  react-dom:
-    specifier: ^18.0.0
-    version: 18.2.0(react@18.2.0)
+importers:
 
-devDependencies:
-  husky:
-    specifier: 8.0.3
-    version: 8.0.3
-  lint-staged:
-    specifier: 13.2.3
-    version: 13.2.3
-  rome:
-    specifier: 12.1.3
-    version: 12.1.3
-  tsx:
-    specifier: 3.12.7
-    version: 3.12.7
-  vite-plugin-watch-and-run:
-    specifier: ^1.1.3
-    version: 1.1.3
-  vitest:
-    specifier: 0.33.0
-    version: 0.33.0
+  .:
+    devDependencies:
+      husky:
+        specifier: 8.0.3
+        version: 8.0.3
+      lint-staged:
+        specifier: 13.2.3
+        version: 13.2.3
+      rome:
+        specifier: 12.1.3
+        version: 12.1.3
+      tsx:
+        specifier: 3.12.7
+        version: 3.12.7
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+      vitest:
+        specifier: 0.33.0
+        version: 0.33.0
+
+  packages/cli:
+    dependencies:
+      execa:
+        specifier: ^7.1.1
+        version: 7.1.1
+      yargs:
+        specifier: ^17.7.2
+        version: 17.7.2
+
+  packages/common: {}
+
+  packages/wrapper:
+    dependencies:
+      '@astro-deck/common':
+        specifier: workspace:*
+        version: link:../common
+      '@astrojs/mdx':
+        specifier: ^0.19.7
+        version: 0.19.7(astro@2.9.0)
+      '@astrojs/react':
+        specifier: ^2.2.1
+        version: 2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      '@types/react':
+        specifier: ^18.0.21
+        version: 18.2.14
+      '@types/react-dom':
+        specifier: ^18.0.6
+        version: 18.2.6
+      astro:
+        specifier: ^2.9.0
+        version: 2.9.0
+      react:
+        specifier: ^18.0.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.0.0
+        version: 18.2.0(react@18.2.0)
+      vite-plugin-watch-and-run:
+        specifier: ^1.1.3
+        version: 1.1.3
 
 packages:
 
@@ -670,7 +691,7 @@ packages:
     resolution: {integrity: sha512-jHl1YHItwOI8Z0h4kvx5LaJjcjY4zbmgSZVajWaGanCmbBKYphVP3UoNHDhs5944Ar7fJ/L7MNSdIINBhurIOA==}
     dependencies:
       safe-stable-stringify: 2.4.3
-    dev: true
+    dev: false
 
   /@mdx-js/mdx@2.3.0:
     resolution: {integrity: sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==}
@@ -1125,7 +1146,7 @@ packages:
       kleur: 4.1.5
       magic-string: 0.27.0
       mime: 3.0.0
-      network-information-types: 0.1.1(typescript@5.1.3)
+      network-information-types: 0.1.1(typescript@5.1.6)
       ora: 6.3.1
       p-limit: 4.0.0
       path-to-regexp: 6.2.1
@@ -1138,7 +1159,7 @@ packages:
       string-width: 5.1.2
       strip-ansi: 7.1.0
       tsconfig-resolver: 3.0.1
-      typescript: 5.1.3
+      typescript: 5.1.6
       unist-util-visit: 4.1.2
       vfile: 5.3.7
       vite: 4.3.9(@types/node@20.4.1)
@@ -1381,6 +1402,15 @@ packages:
       slice-ansi: 5.0.0
       string-width: 5.1.2
     dev: true
+
+  /cliui@8.0.1:
+    resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wrap-ansi: 7.0.0
+    dev: false
 
   /clone@1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
@@ -1772,6 +1802,11 @@ packages:
   /gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
+    dev: false
+
+  /get-caller-file@2.0.5:
+    resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
+    engines: {node: 6.* || 8.* || >= 10.*}
     dev: false
 
   /get-func-name@2.0.0:
@@ -2900,12 +2935,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  /network-information-types@0.1.1(typescript@5.1.3):
+  /network-information-types@0.1.1(typescript@5.1.6):
     resolution: {integrity: sha512-mLXNafJYOkiJB6IlF727YWssTRpXitR+tKSLyA5VAdBi3SOvLf5gtizHgxf241YHPWocnAO/fAhVrB/68tPHDw==}
     peerDependencies:
       typescript: '>= 3.0.0'
     dependencies:
-      typescript: 5.1.3
+      typescript: 5.1.6
     dev: false
 
   /nlcst-to-string@3.1.1:
@@ -3309,6 +3344,11 @@ packages:
       unist-util-visit: 4.1.2
     dev: false
 
+  /require-directory@2.1.1:
+    resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
     dev: true
@@ -3440,7 +3480,7 @@ packages:
   /safe-stable-stringify@2.4.3:
     resolution: {integrity: sha512-e2bDA2WJT0wxseVd4lsDP4+3ONX6HpMXQa1ZhFQ7SU+GjvORCmShbCMltrtIDfkYhVHrOcPtj+KhmDBdPdZD1g==}
     engines: {node: '>=10'}
-    dev: true
+    dev: false
 
   /sass-formatter@0.7.6:
     resolution: {integrity: sha512-hXdxU6PCkiV3XAiSnX+XLqz2ohHoEnVUlrd8LEVMAI80uB1+OTScIkH9n6qQwImZpTye1r1WG1rbGUteHNhoHg==}
@@ -3786,11 +3826,10 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /typescript@5.1.3:
-    resolution: {integrity: sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==}
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: false
 
   /ufo@1.1.2:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
@@ -3962,7 +4001,7 @@ packages:
     dependencies:
       '@kitql/helper': 0.6.1
       micromatch: 4.0.5
-    dev: true
+    dev: false
 
   /vite@4.3.9(@types/node@20.4.1):
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
@@ -4194,7 +4233,6 @@ packages:
       ansi-styles: 4.3.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
-    dev: true
 
   /wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
@@ -4203,6 +4241,11 @@ packages:
       ansi-styles: 6.2.1
       string-width: 5.1.2
       strip-ansi: 7.1.0
+    dev: false
+
+  /y18n@5.0.8:
+    resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
+    engines: {node: '>=10'}
     dev: false
 
   /yallist@3.1.1:
@@ -4221,6 +4264,19 @@ packages:
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
+    dev: false
+
+  /yargs@17.7.2:
+    resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
+    engines: {node: '>=12'}
+    dependencies:
+      cliui: 8.0.1
+      escalade: 3.1.1
+      get-caller-file: 2.0.5
+      require-directory: 2.1.1
+      string-width: 4.2.3
+      y18n: 5.0.8
+      yargs-parser: 21.1.1
     dev: false
 
   /yocto-queue@0.1.0:

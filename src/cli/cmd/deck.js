@@ -9,12 +9,12 @@ exports.builder = {
 	},
 };
 exports.handler = function (argv) {
-	let resolvedPath;
+	const astroDeckPagesFolder = path.resolve(__dirname, "../../pages");
 
 	try {
-		resolvedPath = path.resolve(argv.path);
-        mdxToPresentation(resolvedPath);
+		const filePath = path.resolve(argv.path);
+		mdxToPresentation(filePath, astroDeckPagesFolder);
 	} catch (error) {
-        console.error(`Error: ${error.message}`);
+		console.error(`Error: ${error.message}`);
 	}
 };

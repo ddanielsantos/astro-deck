@@ -1,19 +1,23 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function createSlidesFolder() {
-	const slides_folder = path.resolve("src/pages/slides");
-	if (!fs.existsSync(slides_folder)) {
-		fs.mkdirSync(slides_folder, { recursive: true });
+/**
+ * @param {string} astroDeckPagesFolder Where the pages folder is located
+ */
+function createSlidesFolderOrTurnEmpty(astroDeckPagesFolder) {
+	const slidesFolder = path.resolve(astroDeckPagesFolder, "slides");
+
+	if (!fs.existsSync(slidesFolder)) {
+		fs.mkdirSync(slidesFolder, { recursive: true });
 		return;
 	}
 
-	const files = fs.readdirSync(slides_folder);
+	const files = fs.readdirSync(slidesFolder);
 	for (const file of files) {
-		fs.rmSync(path.resolve(slides_folder, file));
+		fs.rmSync(path.resolve(slidesFolder, file));
 	}
 }
 
 module.exports = {
-	createSlidesFolder,
+	createSlidesFolderOrTurnEmpty,
 };

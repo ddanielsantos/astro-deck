@@ -1,36 +1,43 @@
 const fs = require("node:fs");
 const p = require("node:path");
 
-const { createSlidesFolder } = require("./create-slides-folder");
+const { createSlidesFolderOrTurnEmpty } = require("./create-slides-folder");
 const { getSlidesFromContent } = require("./get-slides-from-content");
 const { getComponentsFromSlide } = require("./get-components-from-slide");
 const {
 	getImportStringsFromComponents,
 } = require("./get-import-strings-from-slide");
 
-const layout_import = `---
+const layoutImport = `---
 layout: ../../layouts/slide-wrapper.astro
 ---
 
 `;
 
-function mdxToPresentation(path) {
-	const mdx = fs.readFileSync(path, "utf-8");
+/**
+ * @param {string} path Where the .mdx file is located
+ * @param {string} astroDeckPagesFolder Where the pages folder is located
+ */
+function mdxToPresentation(path, astroDeckPagesFolder) {
+	const mdxFileContent = fs.readFileSync(path, "utf-8");
 
-	createSlidesFolder();
+	createSlidesFolderOrTurnEmpty(astroDeckPagesFolder);
 
-	for (const [index, slide] of getSlidesFromContent(mdx).entries()) {
-		const file_path = p.resolve(`src/pages/slides/${index + 1}.mdx`);
+	for (const [index, slide] of getSlidesFromContent(mdxFileContent).entries()) {
+		const slidePath = p.resolve(
+			astroDeckPagesFolder,
+			"slides",
+			`${index + 1}.mdx`,
+		);
 
-		const slide_components = getComponentsFromSlide(slide);
+		const slideComponents = getComponentsFromSlide(slide);
 
-		const content =
-			layout_import +
-			getImportStringsFromComponents(slide_components).join("\n") +
-			"\n\n" +
+		const slideContent =
+			layoutImport +
+			getImportStringsFromComponents(slideComponents).join("\n") +
 			slide;
 
-		fs.writeFileSync(file_path, content, {
+		fs.writeFileSync(slidePath, slideContent, {
 			flag: "w+",
 		});
 	}

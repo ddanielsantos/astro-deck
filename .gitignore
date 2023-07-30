@@ -2,9 +2,9 @@
 .vscode/
 
 # build output
-**/dist/
+dist/
 # generated types
-**/.astro/
+.astro/
 
 # dependencies
 node_modules/
@@ -25,4 +25,4 @@ pnpm-debug.log*
 
 
 # proto-deck generated files
-**/pages/slides/*.mdx
+src/pages/slides

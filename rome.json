@@ -4,20 +4,12 @@
 		"enabled": false
 	},
 	"files": {
-		"ignore": [
-			".vscode/",
-			"node_modules/",
-			"packages/**/dist",
-			"packages/**/node_modules"
-		]
+		"ignore": [".vscode/"]
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"all": true,
-			"nursery": {
-				"noConsoleLog": "off"
-			}
+			"all": true
 		}
 	},
 	"formatter": {

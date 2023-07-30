@@ -1,4 +1,4 @@
-export function getComponentsFromSlide(slide: string): string[] {
+function getComponentsFromSlide(slide) {
 	const JSX_COMPONENT_MATCHER = /(?<=<)([A-Z][A-z]*)(?=[^/]*\/?>)/g;
 
 	const components = slide.match(JSX_COMPONENT_MATCHER);
@@ -9,3 +9,7 @@ export function getComponentsFromSlide(slide: string): string[] {
 
 	return [...new Set(components)];
 }
+
+module.exports = {
+	getComponentsFromSlide,
+};

@@ -1,10 +1,10 @@
-import fs from "node:fs";
-import path from "node:path";
+const fs = require("node:fs");
+const path = require("node:path");
 
-export function createSlidesFolder() {
+function createSlidesFolder() {
 	const slides_folder = path.resolve("src/pages/slides");
 	if (!fs.existsSync(slides_folder)) {
-		fs.mkdirSync(slides_folder);
+		fs.mkdirSync(slides_folder, { recursive: true });
 		return;
 	}
 
@@ -13,3 +13,7 @@ export function createSlidesFolder() {
 		fs.rmSync(path.resolve(slides_folder, file));
 	}
 }
+
+module.exports = {
+	createSlidesFolder,
+};

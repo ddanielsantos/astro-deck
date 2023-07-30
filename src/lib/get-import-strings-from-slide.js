@@ -1,4 +1,4 @@
-export function getImportStringsFromComponents(components: string[]): string[] {
+function getImportStringsFromComponents(components) {
 	const unique_components = [...new Set(components)];
 
 	const imports = unique_components.map((component) => {
@@ -7,3 +7,7 @@ export function getImportStringsFromComponents(components: string[]): string[] {
 
 	return imports;
 }
+
+module.exports = {
+	getImportStringsFromComponents,
+};

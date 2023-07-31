@@ -9,7 +9,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"all": true
+			"all": true,
+			"nursery": {
+				"noForEach": "off"
+			}
 		}
 	},
 	"formatter": {

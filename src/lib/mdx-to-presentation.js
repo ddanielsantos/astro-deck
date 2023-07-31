@@ -41,8 +41,6 @@ function mdxToPresentation(path, astroDeckPagesFolder) {
 			flag: "w+",
 		});
 	}
-
-	console.log("Done!");
 }
 
 module.exports = {

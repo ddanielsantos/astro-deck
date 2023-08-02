@@ -6,4 +6,4 @@ yargs(process.argv.slice(2))
 	.scriptName("astro-deck")
 	.usage("$0 <cmd> [args]")
 	.command(command)
-	.help();
+	.help().argv;

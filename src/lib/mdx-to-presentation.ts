@@ -1,12 +1,10 @@
-const fs = require("node:fs");
-const p = require("node:path");
+import fs from "node:fs";
+import p from "node:path";
 
-const { createSlidesFolderOrTurnEmpty } = require("./create-slides-folder");
-const { getSlidesFromContent } = require("./get-slides-from-content");
-const { getComponentsFromSlide } = require("./get-components-from-slide");
-const {
-	getImportStringsFromComponents,
-} = require("./get-import-strings-from-slide");
+import { createSlidesFolderOrTurnEmpty } from "./create-slides-folder.js";
+import { getSlidesFromContent } from "./get-slides-from-content.js";
+import { getComponentsFromSlide } from "./get-components-from-slide.js";
+import { getImportStringsFromComponents } from "./get-import-strings-from-slide.js";
 
 const layoutImport = `---
 layout: ../../layouts/slide-wrapper.astro
@@ -14,11 +12,10 @@ layout: ../../layouts/slide-wrapper.astro
 
 `;
 
-/**
- * @param {string} path Where the .mdx file is located
- * @param {string} astroDeckPagesFolder Where the pages folder is located
- */
-function mdxToPresentation(path, astroDeckPagesFolder) {
+export function mdxToPresentation(
+	path: fs.PathOrFileDescriptor,
+	astroDeckPagesFolder: string,
+) {
 	const mdxFileContent = fs.readFileSync(path, "utf-8");
 
 	createSlidesFolderOrTurnEmpty(astroDeckPagesFolder);
@@ -42,7 +39,3 @@ function mdxToPresentation(path, astroDeckPagesFolder) {
 		});
 	}
 }
-
-module.exports = {
-	mdxToPresentation,
-};

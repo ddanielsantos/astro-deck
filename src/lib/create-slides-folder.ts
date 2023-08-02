@@ -1,10 +1,7 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
 
-/**
- * @param {string} astroDeckPagesFolder Where the pages folder is located
- */
-function createSlidesFolderOrTurnEmpty(astroDeckPagesFolder) {
+export function createSlidesFolderOrTurnEmpty(astroDeckPagesFolder: string) {
 	const slidesFolder = path.resolve(astroDeckPagesFolder, "slides");
 
 	if (!fs.existsSync(slidesFolder)) {
@@ -17,7 +14,3 @@ function createSlidesFolderOrTurnEmpty(astroDeckPagesFolder) {
 		fs.rmSync(path.resolve(slidesFolder, file));
 	}
 }
-
-module.exports = {
-	createSlidesFolderOrTurnEmpty,
-};

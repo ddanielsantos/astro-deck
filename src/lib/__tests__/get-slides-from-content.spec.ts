@@ -1,6 +1,6 @@
 import { it, expect } from "vitest";
 
-import { getSlidesFromContent } from "../get-slides-from-content";
+import { getSlidesFromContent } from "../get-slides-from-content.js";
 
 it("split slides from content", () => {
 	const content = `

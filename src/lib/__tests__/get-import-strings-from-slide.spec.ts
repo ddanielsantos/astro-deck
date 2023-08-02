@@ -1,6 +1,6 @@
 import { it, expect } from "vitest";
 
-import { getImportStringsFromComponents } from "../get-import-strings-from-slide";
+import { getImportStringsFromComponents } from "../get-import-strings-from-slide.js";
 
 it("should handle duplicated components", () => {
 	const components = ["Head", "Title", "Header", "Notes", "Header"];

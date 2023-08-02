@@ -1,6 +1,6 @@
 import { it, expect } from "vitest";
 
-import { getComponentsFromSlide } from "../get-components-from-slide";
+import { getComponentsFromSlide } from "../get-components-from-slide.js";
 
 it("should handle duplicated components", () => {
 	const slide = `

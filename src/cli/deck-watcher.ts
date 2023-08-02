@@ -1,17 +1,19 @@
-const path = require("node:path");
-const fs = require("node:fs");
+import { resolve } from "node:path";
+import { watch } from "node:fs";
 
-const { handler: deckHandler } = require("./cmd/deck");
+import d from "./cmd/deck.js";
+import type { ArgumentsCamelCase } from "yargs";
 
 /**
  * Watches for changes in the provided deck file and rebuilds the presentation, uses the `deck` command under the hood
- * @param {import('yargs').Argv} args - The arguments passed to the CLI
- * @param {number} delay - The delay in milliseconds to wait between OS events
  */
-function deckWatcher(args, delay) {
-	let timeout;
+export function deckWatcher(
+	args: ArgumentsCamelCase<{ path: string }>,
+	delay: number | undefined,
+) {
+	let timeout: NodeJS.Timeout | null;
 
-	const watcher = fs.watch(path.resolve(args.path), (type) => {
+	const watcher = watch(resolve(args.path), (type) => {
 		if (type === "change") {
 			if (timeout) {
 				clearTimeout(timeout);
@@ -19,7 +21,7 @@ function deckWatcher(args, delay) {
 
 			timeout = setTimeout(() => {
 				console.log("[astro-deck] Rebuilding deck...");
-				deckHandler(args);
+				d.handler(args);
 				timeout = null;
 			}, delay);
 		}
@@ -32,7 +34,3 @@ function deckWatcher(args, delay) {
 		});
 	});
 }
-
-module.exports = {
-	deckWatcher,
-};

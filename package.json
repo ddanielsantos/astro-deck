@@ -1,6 +1,11 @@
 {
-	"name": "astro-deck",
 	"version": "0.4.0",
+	"name": "@ddanielsantos/astro-deck",
+	"author": "Daniel Santos",
+	"main": "./dist/cli/index.js",
+	"repository": "https://github.com/ddanielsantos/astro-deck",
+	"homepage": "https://github.com/ddanielsantos/astro-deck#readme",
+	"keywords": ["astro", "cli", "mdx", "presentation"],
 	"bin": {
 		"astro-deck": "./dist/cli/index.js"
 	},

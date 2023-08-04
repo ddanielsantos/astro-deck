@@ -5,7 +5,7 @@ import { SlideControls } from '../components/SlideControls'
 function getSlideFromPathname(
     pathname: string | undefined
 ): string | undefined {
-    return pathname?.split("/").at(-1);
+    return pathname?.split("/").at(-1) || pathname?.split("/").at(-2);
 }
 
 function getCurrentSlide(): number {

@@ -8,4 +8,5 @@ export default defineConfig({
 	experimental: {
 		viewTransitions: true,
 	},
+	outDir: "output",
 });

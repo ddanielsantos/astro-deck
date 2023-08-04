@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { execa } from "execa";
 import type { ArgumentsCamelCase } from "yargs";
 
-export type AstroOptions = "dev" | "build";
+export type AstroOptions = "dev" | "build" | "preview";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,7 +18,6 @@ export async function astro(
 
 	const astroDeckFolder = resolve(__dirname, "..", "..");
 
-	console.log(astroDeckFolder);
 	await execa("astro", [astroOptions, ...astroCommands.map(toString)], {
 		stdio: "inherit",
 		cwd: astroDeckFolder,

@@ -1,6 +1,6 @@
 {
 	"version": "0.4.0",
-	"name": "@ddanielsantos/astro-deck",
+	"name": "astro-deck",
 	"author": "Daniel Santos",
 	"main": "./dist/cli/index.js",
 	"repository": "https://github.com/ddanielsantos/astro-deck",

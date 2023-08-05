@@ -11,12 +11,8 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "astro dev",
-		"start": "npm run deck && astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"prepare": "husky install",
+		"prepare": "husky install && pnpm build",
+		"build": "tsc",
 		"ci": "rome ci .",
 		"format:write": "rome format --write ."
 	},

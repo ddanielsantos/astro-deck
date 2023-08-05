@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts
+          registry-url: 'https://registry.npmjs.org'
 
       - name: setup pnpm
         uses: pnpm/action-setup@v2
@@ -43,6 +44,6 @@ jobs:
         run: pnpm build
 
       - name: publish
-        run: pnpm publish --access public
+        run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

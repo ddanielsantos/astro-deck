@@ -38,7 +38,7 @@ jobs:
 
       - name: install deps
         run: pnpm install
-      
+
       - name: build
         run: pnpm build
 
@@ -46,6 +46,3 @@ jobs:
         run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      # - run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

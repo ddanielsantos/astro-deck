@@ -1,0 +1,48 @@
+name: test pull requests
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: checkout
+          uses: actions/checkout@v3
+
+        - name: setup nodejs
+          uses: actions/setup-node@v3
+          with:
+            node-version: lts/Hydrogen
+            registry-url: 'https://registry.npmjs.org'
+
+        - name: setup pnpm
+          uses: pnpm/action-setup@v2
+          with:
+            version: 8
+            run_install: false
+
+        - name: setup store path
+          shell: bash
+          run: |
+           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+        - name: setup pnpm cache
+          uses: actions/cache@v3
+          with:
+            path: ${{ env.STORE_PATH }}
+            key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+            restore-keys: |
+                ${{ runner.os }}-pnpm-store-
+
+        - name: install deps
+          run: pnpm install
+
+        - name: build
+          run: pnpm build
+
+        - name: test
+          run: pnpm vitest

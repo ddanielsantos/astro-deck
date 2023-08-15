@@ -1,0 +1,57 @@
+---
+interface Props {
+    hasNext: boolean;
+    hasPrev: boolean;
+    nextSlideUrl: string;
+    prevSlideUrl: string;
+}
+
+const { hasNext, hasPrev, nextSlideUrl, prevSlideUrl } = Astro.props;
+---
+
+{
+    hasPrev && (
+        <a
+            href={prevSlideUrl}
+            id="deck-prev-link"
+            style={{
+                position: "absolute",
+                top: "0",
+                width: "20%",
+                height: "100%",
+                opacity: 0,
+                left: 0,
+            }}
+        />
+    )
+}
+{
+    hasNext && (
+        <a
+            href={nextSlideUrl}
+            id="deck-next-link"
+            style={{
+                position: "absolute",
+                top: "0",
+                width: "20%",
+                height: "100%",
+                opacity: 0,
+                right: 0,
+            }}
+        />
+    )
+}
+
+<script>
+    document.addEventListener("keydown", (ev) => {
+        if (ev.key === "ArrowLeft") {
+            const prevButton = document.getElementById("deck-prev-link");
+            prevButton?.click();
+        }
+        
+        if (ev.key === "ArrowRight") {
+            const nextButton = document.getElementById("deck-next-link");
+            nextButton?.click();
+        }
+    });
+</script>

@@ -1,6 +1,6 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import { SlideControls } from '../components/SlideControls'
+import { ViewTransitions } from "astro:transitions";
+import SlideControls from "./slide-controls.astro";
 
 function getSlideFromPathname(
     pathname: string | undefined
@@ -30,14 +30,15 @@ const prevSlideUrl = `/slides/${currentSlide - 1}`;
 </head>
 
 <div>
-    <p>
-        slide {currentSlide} of {numberOfSlides}
-    </p>
-    <!-- TODO: custom transitions -->
     <div transition:animate="slide">
-        <slot/>
+        <slot />
     </div>
-    <SlideControls hasNext={hasNext} hasPrev={hasPrev} prevSlideUrl={prevSlideUrl} nextSlideUrl={nextSlideUrl}/>
+    <SlideControls
+        hasNext={hasNext}
+        hasPrev={hasPrev}
+        prevSlideUrl={prevSlideUrl}
+        nextSlideUrl={nextSlideUrl}
+    />
     {
         slides.map((slide, index) => (
             <a href={`/slides/${index + 1}`}>
@@ -46,15 +47,3 @@ const prevSlideUrl = `/slides/${currentSlide - 1}`;
         ))
     }
 </div>
-
-<script define:vars={{ hasNext, hasPrev, nextSlideUrl, prevSlideUrl }}>
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowRight' && hasNext) {
-            document.querySelector('#next')?.click();
-        }
-
-        if (event.key === 'ArrowLeft' && hasPrev) {
-            document.querySelector('#prev')?.click();
-        }
-    })
-</script>

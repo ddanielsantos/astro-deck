@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should recognize JS imports 1`] = `
+[
+  "./a",
+  "./path/to/file.js",
+  "./path/to/file2.ts",
+  "./path/to/file3.css",
+]
+`;

@@ -1,0 +1,14 @@
+---
+layout: ../../layouts/slide-wrapper.astro
+---
+
+import { Notes } from '../../components/Notes'
+import { Head } from '../../components/Head'
+
+<Notes>
+	test
+</Notes>
+ 
+<Head>
+	test
+</Head>

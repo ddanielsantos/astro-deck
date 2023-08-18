@@ -11,7 +11,8 @@ afterEach(() => {
 });
 
 it("smoke test", async () => {
-	prepareEnvironment(`
+	prepareEnvironment({
+		deckContent: `
     <Notes>
         hello world
     </Notes>
@@ -21,7 +22,8 @@ it("smoke test", async () => {
     <Notes>
         second slide
     </Notes>
-    `);
+    `,
+	});
 
 	const { exitCode } = await astroDeck("deck");
 

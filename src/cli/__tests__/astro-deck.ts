@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ExecaReturnValue, execa } from "execa";
@@ -13,6 +14,12 @@ export async function astroDeck(
 	command: AstroDeckCommand,
 ): Promise<ExecaReturnValue<string>> {
 	const indexFile = "dist/cli/index.js";
+
+	if (!existsSync(indexFile)) {
+		throw new Error(
+			"Could not find the index file. Did you forget to build the CLI?",
+		);
+	}
 
 	return execa(
 		"node",

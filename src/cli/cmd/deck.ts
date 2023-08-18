@@ -1,10 +1,7 @@
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 import type { CommandModule } from "yargs";
 
 import { mdxToPresentation } from "../../lib/mdx-to-presentation.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const command: CommandModule<{}, { path: string }> = {
 	command: "deck <path>",
@@ -16,20 +13,12 @@ const command: CommandModule<{}, { path: string }> = {
 	},
 
 	handler: function (args) {
-		const astroDeckPagesFolder = resolve(
-			__dirname,
-			"..",
-			"..",
-			"..",
-			"src",
-			"pages",
-		);
-
 		try {
 			const filePath = resolve(args.path);
-			mdxToPresentation(filePath, astroDeckPagesFolder);
+			mdxToPresentation(filePath);
 		} catch (error) {
 			console.error(`[astro-deck] error: ${(error as Error).message}`);
+			console.error(error);
 		}
 	},
 };

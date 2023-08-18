@@ -3,7 +3,14 @@
 exports[`should handle duplicated components 1`] = `
 [
   "Head",
-  "Title",
+  "Header",
+  "StepList",
+]
+`;
+
+exports[`should ignore custom components 1`] = `
+[
+  "Head",
   "Header",
   "StepList",
 ]

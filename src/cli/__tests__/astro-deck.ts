@@ -1,19 +1,21 @@
-import { existsSync } from "node:fs";
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { ExecaReturnValue, execa } from "execa";
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { execa, ExecaReturnValue } from "execa";
 
 export type AstroDeckCommand = "deck";
 
-export const __dirname = dirname(fileURLToPath(import.meta.url));
+type AstroDeckResult = {
+	execa: ExecaReturnValue<string>;
+	numberOfSlides: number;
+};
 
 /**
  * Runs the Astro Deck CLI with the given options and commands
  */
 export async function astroDeck(
 	command: AstroDeckCommand,
-): Promise<ExecaReturnValue<string>> {
-	const indexFile = "dist/cli/index.js";
+): Promise<AstroDeckResult> {
+	const indexFile = resolve("dist", "cli", "index.js");
 
 	if (!existsSync(indexFile)) {
 		throw new Error(
@@ -21,11 +23,19 @@ export async function astroDeck(
 		);
 	}
 
-	return execa(
-		"node",
-		[indexFile, command, "./src/cli/__tests__/__fixtures__/deck.mdx"],
-		{
+	return {
+		execa: await execa("node", [indexFile, command, "./deck.mdx"], {
 			stdio: "inherit",
-		},
-	);
+			cwd: join(__dirname, "__fixtures__"),
+		}),
+		numberOfSlides: getNumberOfSlides(),
+	};
+}
+
+function getNumberOfSlides(): number {
+	const pagesFolder = resolve("src", "pages", "slides");
+
+	return readdirSync(pagesFolder).filter((file: string) =>
+		file.endsWith(".mdx"),
+	).length;
 }

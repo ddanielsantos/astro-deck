@@ -1,8 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { expect } from "vitest";
-
 const DECK_FILE = path.resolve(
 	"src",
 	"cli",
@@ -25,17 +23,9 @@ export function prepareEnvironment({
 
 const PAGES_FOLDER = path.resolve("src", "pages");
 
-const SLIDES_FOLDER = path.resolve(PAGES_FOLDER, "slides");
-
 export function restoreEnvironment(): void {
 	if (fs.existsSync(PAGES_FOLDER)) {
 		fs.rmdirSync(PAGES_FOLDER, { recursive: true });
 	}
 	fs.writeFileSync(DECK_FILE, "");
-}
-
-export function expectSlides(qty: number) {
-	const slides = fs.readdirSync(SLIDES_FOLDER);
-
-	expect(slides.length).toBe(qty);
 }

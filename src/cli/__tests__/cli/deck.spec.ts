@@ -12,20 +12,25 @@ afterEach(() => {
 
 it("smoke test", async () => {
 	prepareEnvironment({
-		deckContent: `
-    <Notes>
-        hello world
-    </Notes>
-
-    ---
-
-    <Notes>
-        second slide
-    </Notes>
-    `,
+		deckContent: `import './MyStyle.css'
+        import { MyComp } from './comps/'
+        import { Notes } from './comps/'
+        
+        testing
+        
+        ---
+        
+        testing slide 2
+        
+        <MyComp/>
+        
+        <Notes>
+            my custom not
+        </Notes>`,
 	});
 
-	const { exitCode } = await astroDeck("deck");
+	const { execa, numberOfSlides } = await astroDeck("deck");
 
-	expect(exitCode).toBe(0);
+	expect(execa.exitCode).toBe(0);
+	expect(numberOfSlides).toBe(2);
 });

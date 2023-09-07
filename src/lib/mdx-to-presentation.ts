@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 
-import { createSlidesFolderOrTurnEmpty } from "./create-slides-folder.js";
+import { createOrClearFolder } from "./create-slides-folder.js";
 import { getSlidesFromContent } from "./get-slides-from-content.js";
 import { getBuiltinComponents } from "./get-builtin-components.js";
 import { getSlideContent } from "./get-slide-content.js";
@@ -52,8 +52,9 @@ export function mdxToPresentation(deckPath: fs.PathOrFileDescriptor) {
 	let mdxFileContent = fs.readFileSync(deckPath, "utf-8");
 
 	const astroDeckPagesFolder = getPagesFolderPath();
+	const slidesFolder = path.resolve(astroDeckPagesFolder, "slides");
 
-	createSlidesFolderOrTurnEmpty(astroDeckPagesFolder);
+	createOrClearFolder(slidesFolder);
 
 	const rawImportStrings = getImportedFilesPath(mdxFileContent);
 

@@ -19,6 +19,7 @@ const command: CommandModule<{}, { path: string }> = {
 		} catch (error) {
 			console.error(`[astro-deck] error: ${(error as Error).message}`);
 			console.error(error);
+			process.exit(1);
 		}
 	},
 };

@@ -1,5 +1,6 @@
 # editors
 .vscode/
+.idea/
 
 # build output
 dist/
